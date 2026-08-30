@@ -2,6 +2,7 @@
 /**
  * EmulaROOMs Theme Functions
  * Autor: Robinson Avila
+ * Complete functions.php with Menu Walker integrated
  */
 
 if (!defined('ABSPATH')) {
@@ -10,6 +11,7 @@ if (!defined('ABSPATH')) {
 
 define('EMULA_VERSION', '1.0.0');
 
+// --- Configuración del Tema ---
 function emularooms_setup() {
     // Soporte de idiomas
     load_theme_textdomain('emularooms', get_template_directory() . '/languages');
@@ -50,6 +52,7 @@ function emularooms_setup() {
 }
 add_action('after_setup_theme', 'emularooms_setup');
 
+// --- Cargar Estilos y Scripts ---
 function emularooms_scripts() {
     // Estilos
     wp_enqueue_style('emularooms-fonts', 'https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&display=swap', array(), null);
@@ -62,7 +65,7 @@ function emularooms_scripts() {
 }
 add_action('wp_enqueue_scripts', 'emularooms_scripts');
 
-// Registrar sidebar
+// --- Registrar Sidebar ---
 function emularooms_widgets_init() {
     register_sidebar(array(
         'name' => __('Sidebar Principal', 'emularooms'),
@@ -75,25 +78,25 @@ function emularooms_widgets_init() {
 }
 add_action('widgets_init', 'emularooms_widgets_init');
 
-// Personalizar excerpt
+// --- Personalizar Excerpt ---
 function emularooms_excerpt_more($more) {
     return '...';
 }
 add_filter('excerpt_more', 'emularooms_excerpt_more');
 
-// Agregar clases al body
+// --- Agregar clases al body ---
 function emularooms_body_classes($classes) {
     $classes[] = 'emularooms-theme';
     return $classes;
 }
 add_filter('body_class', 'emularooms_body_classes');
 
-// Mostrar fecha en formato español
+// --- Mostrar fecha en formato español ---
 function emularooms_date_es($date) {
     return mysql2date('d M Y', $date);
 }
 
-// Función para obtener la etiqueta de versión o formato desde categorías
+// --- Función para obtener la etiqueta de versión o formato desde categorías ---
 function emularooms_get_meta_from_categories() {
     $categories = get_the_category();
     $version = null;
@@ -124,7 +127,7 @@ function emularooms_get_meta_from_categories() {
     return array('version' => $version, 'format' => $format, 'rating' => $rating);
 }
 
-// Funciones de rating
+// --- Funciones de rating ---
 function emularooms_render_stars($rating) {
     if ($rating === null || !is_numeric($rating)) return '';
     $html = '';
@@ -143,7 +146,7 @@ function emularooms_render_stars($rating) {
     return '<div class="rating-stars">' . $html . '</div>';
 }
 
-// Widget de posts recientes (personalizado)
+// --- Widget de posts recientes (personalizado) ---
 class EmulaROOMs_Recent_Posts extends WP_Widget {
     function __construct() {
         parent::__construct('emularooms_recent', __('EmulaROOMs: Recientes', 'emularooms'), array('description' => __('Últimas entradas', 'emularooms')));
@@ -192,7 +195,7 @@ class EmulaROOMs_Recent_Posts extends WP_Widget {
 }
 register_widget('EmulaROOMs_Recent_Posts');
 
-// Widget de posts populares (reemplazo de PopularPosts)
+// --- Widget de posts populares (reemplazo de PopularPosts) ---
 class EmulaROOMs_Popular_Posts extends WP_Widget {
     function __construct() {
         parent::__construct('emularooms_popular', __('EmulaROOMs: Populares', 'emularooms'), array('description' => __('Entradas más vistas', 'emularooms')));
@@ -242,7 +245,7 @@ class EmulaROOMs_Popular_Posts extends WP_Widget {
 }
 register_widget('EmulaROOMs_Popular_Posts');
 
-// Contador de vistas
+// --- Contador de vistas ---
 function emularooms_track_post_views($post_id) {
     if (!is_single()) return;
     if (empty($post_id)) {
@@ -261,3 +264,46 @@ add_action('wp_head', function() {
         emularooms_track_post_views(get_the_ID());
     }
 });
+
+// ============================================================
+//  CLASE WALKER PARA EL MENÚ (PUNTO 4) - INTEGRADA AQUÍ
+// ============================================================
+class EmulaROOMs_Menu_Walker extends Walker_Nav_Menu {
+    function start_lvl(&$output, $depth = 0, $args = null) {
+        $output .= '<div class="dropdown__menu">';
+    }
+    function end_lvl(&$output, $depth = 0, $args = null) {
+        $output .= '</div>';
+    }
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $classes[] = 'menu-item-' . $item->ID;
+        if (in_array('menu-item-has-children', $classes)) {
+            $classes[] = 'dropdown';
+        }
+        $class_names = implode(' ', array_filter($classes));
+        $output .= '<div class="' . esc_attr($class_names) . '">';
+        $atts = array(
+            'href' => !empty($item->url) ? $item->url : '#',
+            'title' => !empty($item->attr_title) ? $item->attr_title : '',
+            'target' => !empty($item->target) ? $item->target : '',
+            'rel' => !empty($item->xfn) ? $item->xfn : '',
+        );
+        $attributes = '';
+        foreach ($atts as $attr => $value) {
+            if (!empty($value)) {
+                $attributes .= ' ' . $attr . '="' . esc_attr($value) . '"';
+            }
+        }
+        $item_output = '<a' . $attributes . '>';
+        $item_output .= esc_html($item->title);
+        if (in_array('menu-item-has-children', $classes)) {
+            $item_output .= ' <i class="fas fa-chevron-down"></i>';
+        }
+        $item_output .= '</a>';
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+    function end_el(&$output, $item, $depth = 0, $args = null) {
+        $output .= '</div>';
+    }
+}
