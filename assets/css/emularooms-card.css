@@ -2,29 +2,24 @@
 .posts-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 @media (min-width: 600px) and (max-width: 899px) {
     .posts-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.2rem;
+        gap: 1rem;
     }
 }
 
 @media (min-width: 900px) {
     .posts-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
     }
 }
 
-@media (max-width: 767px) {
-    .posts-grid {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 599px) {
     .posts-grid {
         gap: 0.8rem;
     }
@@ -32,7 +27,7 @@
 
 .post-card {
     background: rgba(56, 142, 60, 0.15);
-    border-radius: 30px;
+    border-radius: 20px;
     overflow: hidden;
     border: none;
     text-decoration: none !important;
@@ -56,8 +51,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    border-radius: 30px;
+    padding: 8px;
+    border-radius: 20px;
 }
 
 .post-card__img img {
@@ -67,7 +62,7 @@
     object-position: top;
     display: block;
     transition: none;
-    border-radius: 40px;
+    border-radius: 12px;
 }
 
 .post-card:hover .post-card__img img {
@@ -76,17 +71,17 @@
 
 .img-overlay {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
     background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: 40px;
+    border-radius: 12px;
     pointer-events: none;
 }
 
@@ -95,11 +90,11 @@
 }
 
 .img-overlay i {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: white;
     background: rgba(56, 142, 60, 0.9);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -109,13 +104,13 @@
 
 .post-card__featured-tag {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 10px;
+    left: 10px;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    padding: 4px 10px;
-    border-radius: 30px;
-    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.65rem;
     font-weight: 600;
     color: #fff;
     text-transform: uppercase;
@@ -125,14 +120,14 @@
 }
 
 .post-card__body {
-    padding: 0 10px 10px 10px;
+    padding: 0 8px 8px 8px;
     text-align: center;
 }
 
 .post-card__title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -149,41 +144,41 @@
 
 @media (max-width: 768px) {
     .post-card__title {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
     .post-card__title {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
 .post-card__version {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #aaa;
     background: rgba(0, 0, 0, 0.3);
     display: inline-block;
-    padding: 0.2rem 0.6rem;
+    padding: 0.15rem 0.5rem;
     border-radius: 20px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .post-card__date {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: #9e9e9e;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .rating-stars {
     display: flex;
     justify-content: center;
-    gap: 0.2rem;
+    gap: 0.15rem;
 }
 
 .rating-star {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     display: inline-block;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     box-shadow: 0 0 4px rgba(255, 215, 0, 0.5), inset 0 0 4px rgba(255, 255, 255, 0.8);
@@ -229,7 +224,7 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 1rem;
+    gap: 0.8rem;
     padding-bottom: 12px;
     scroll-behavior: smooth;
     scrollbar-width: thin;
