@@ -130,7 +130,7 @@ h4 { font-size: 1.1rem; }
     row-gap: 0.5rem;
 }
 
-/* LOGO: solo imagen y texto, SIN icono */
+/* LOGO: SOLO IMAGEN Y TEXTO, SIN ICONO DE CONSOLA */
 .logo {
     display: flex;
     align-items: center;
@@ -157,7 +157,8 @@ h4 { font-size: 1.1rem; }
     text-transform: none !important;
 }
 
-/* Se ha ELIMINADO por completo la regla .logo::before (icono de consola) */
+/* NO existe ninguna regla .logo::before ni .footer-right .logo::before */
+/* El icono de consola ha sido ELIMINADO por completo */
 
 #nav-check,
 #search-check {
