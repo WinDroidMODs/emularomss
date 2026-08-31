@@ -43,7 +43,7 @@
             <span></span><span></span><span></span>
         </label>
 
-        <!-- LOGO: solo logo (si existe) + nombre clicable, SIN icono de consola -->
+        <!-- LOGO CORREGIDO: SOLO LOGO (SI EXISTE) + NOMBRE CLICABLE, SIN ICONO -->
         <div class="logo <?php echo has_custom_logo() ? 'has-image' : ''; ?>">
             <?php if (has_custom_logo()) : ?>
                 <div class="logo__img">
