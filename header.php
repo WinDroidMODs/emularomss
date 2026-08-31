@@ -43,14 +43,16 @@
             <span></span><span></span><span></span>
         </label>
 
-        <!-- LOGO CORREGIDO: siempre muestra el nombre, y el logo solo si existe -->
+        <!-- LOGO: solo logo (si existe) + nombre clicable, SIN icono de consola -->
         <div class="logo <?php echo has_custom_logo() ? 'has-image' : ''; ?>">
             <?php if (has_custom_logo()) : ?>
                 <div class="logo__img">
                     <?php the_custom_logo(); ?>
                 </div>
             <?php endif; ?>
-            <span class="logo__text"><?php bloginfo('name'); ?></span>
+            <a href="<?php echo esc_url(home_url('/')); ?>" style="text-decoration: none; color: inherit;">
+                <span class="logo__text"><?php bloginfo('name'); ?></span>
+            </a>
         </div>
 
         <nav class="nav__menu" id="navMenu" aria-label="Menú principal">
