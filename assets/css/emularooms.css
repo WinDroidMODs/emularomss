@@ -130,7 +130,7 @@ h4 { font-size: 1.1rem; }
     row-gap: 0.5rem;
 }
 
-/* LOGO CORREGIDO: fuerza texto normal y oculta icono si hay imagen */
+/* LOGO CORREGIDO: sin icono de consola, nombre clicable */
 .logo {
     display: flex;
     align-items: center;
@@ -157,20 +157,8 @@ h4 { font-size: 1.1rem; }
     text-transform: none !important;  /* Evita mayúsculas forzadas */
 }
 
-/* El icono de consola solo aparece si NO hay imagen */
-.logo::before {
-    content: "\f11b";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 1.3rem;
-    color: var(--accent);
-    margin-right: .4rem;
-}
-
-/* Si hay logo (imagen), oculta el icono de consola */
-.logo.has-image::before {
-    display: none !important;
-}
+/* Eliminada la regla .logo::before que mostraba el icono de consola */
+/* Ya NO existe el icono */
 
 #nav-check,
 #search-check {
