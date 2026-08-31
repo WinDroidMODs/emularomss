@@ -297,9 +297,6 @@ class EmulaROOMs_Menu_Walker extends Walker_Nav_Menu {
         }
         $item_output = '<a' . $attributes . '>';
         $item_output .= esc_html($item->title);
-        if (in_array('menu-item-has-children', $classes)) {
-            $item_output .= ' <i class="fas fa-chevron-down"></i>';
-        }
         $item_output .= '</a>';
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }
