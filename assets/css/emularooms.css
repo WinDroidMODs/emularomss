@@ -130,7 +130,7 @@ h4 { font-size: 1.1rem; }
     row-gap: 0.5rem;
 }
 
-/* LOGO CORREGIDO: sin icono de consola, nombre clicable */
+/* LOGO: solo imagen y texto, SIN icono */
 .logo {
     display: flex;
     align-items: center;
@@ -154,11 +154,10 @@ h4 { font-size: 1.1rem; }
     white-space: nowrap;
     line-height: 1;
     font-family: 'Playfair Display', 'Georgia', serif;
-    text-transform: none !important;  /* Evita mayúsculas forzadas */
+    text-transform: none !important;
 }
 
-/* Eliminada la regla .logo::before que mostraba el icono de consola */
-/* Ya NO existe el icono */
+/* Se ha ELIMINADO por completo la regla .logo::before (icono de consola) */
 
 #nav-check,
 #search-check {
@@ -201,7 +200,6 @@ h4 { font-size: 1.1rem; }
     text-decoration: none;
 }
 
-/* Flecha con movimiento (la que se conserva) */
 .nav__menu .dropdown > a::after {
     content: "\f107";
     font-family: "Font Awesome 5 Free";
