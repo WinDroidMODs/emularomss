@@ -304,3 +304,38 @@ class EmulaROOMs_Menu_Walker extends Walker_Nav_Menu {
         $output .= '</div>';
     }
 }
+
+// ============================================================
+//  FUNCIÓN CALLBACK PARA LOS COMENTARIOS (CORREGIDO)
+// ============================================================
+function emularooms_comment_callback($comment, $args, $depth) {
+    ?>
+    <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+        <div class="comment-body">
+            <div class="comment-meta">
+                <div class="comment-author vcard">
+                    <?php echo get_avatar($comment, 50); ?>
+                    <cite class="fn"><?php comment_author_link(); ?></cite>
+                </div>
+                <div class="comment-metadata">
+                    <a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>">
+                        <time datetime="<?php comment_time('c'); ?>">
+                            <?php comment_date(); ?> a las <?php comment_time(); ?>
+                        </time>
+                    </a>
+                </div>
+            </div>
+            <div class="comment-content">
+                <?php comment_text(); ?>
+            </div>
+            <div class="reply">
+                <?php comment_reply_link(array_merge($args, array(
+                    'reply_text' => 'Responder',
+                    'depth'      => $depth,
+                    'max_depth'  => $args['max_depth'],
+                ))); ?>
+            </div>
+        </div>
+    </li>
+    <?php
+}
